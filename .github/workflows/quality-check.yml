@@ -1,0 +1,79 @@
+name: Code Quality & Testing
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  quality-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: HTML Validation
+        run: |
+          echo "🔍 Validating HTML files..."
+          # Install html-validate for better HTML checking
+          npm install -g html-validate
+          find . -name "*.html" -not -path "./node_modules/*" | xargs html-validate || true
+          
+      - name: CSS Validation
+        run: |
+          echo "🎨 Checking CSS files..."
+          # Install stylelint for CSS linting
+          npm install -g stylelint stylelint-config-standard
+          echo '{ "extends": "stylelint-config-standard" }' > .stylelintrc.json
+          find . -name "*.css" -not -path "./node_modules/*" | xargs stylelint || true
+          
+      - name: JavaScript Linting
+        run: |
+          echo "⚡ Linting JavaScript files..."
+          # Install ESLint for JS linting
+          npm install -g eslint
+          npx eslint --init --yes || true
+          find . -name "*.js" -not -path "./node_modules/*" | xargs npx eslint || true
+          
+      - name: PWA Manifest Validation
+        run: |
+          echo "📱 Validating PWA manifest..."
+          if [ -f "manifest.json" ]; then
+            echo "Manifest file found"
+            # Basic JSON validation
+            python3 -m json.tool manifest.json > /dev/null && echo "✅ Manifest is valid JSON" || echo "❌ Manifest has JSON errors"
+          else
+            echo "⚠️ No manifest.json found"
+          fi
+          
+      - name: Check for common issues
+        run: |
+          echo "🔧 Running additional checks..."
+          
+          # Check for missing alt attributes in images
+          if grep -r "img.*src" . --include="*.html" | grep -v "alt="; then
+            echo "⚠️ Found images without alt attributes"
+          else
+            echo "✅ All images have alt attributes"
+          fi
+          
+          # Check for external links without rel attributes
+          if grep -r "href.*http" . --include="*.html" | grep -v "rel="; then
+            echo "⚠️ Found external links without rel attributes"
+          else
+            echo "✅ External links are properly configured"
+          fi
+          
+          # Check for console.log statements (should be removed in production)
+          if grep -r "console\." . --include="*.js"; then
+            echo "⚠️ Found console statements (consider removing for production)"
+          else
+            echo "✅ No console statements found"
+          fi

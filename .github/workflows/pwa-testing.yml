@@ -1,0 +1,112 @@
+name: PWA Testing
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  pwa-audit:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Install Lighthouse CLI
+        run: npm install -g @lhci/cli lighthouse
+        
+      - name: Serve the app locally
+        run: |
+          # Install a simple HTTP server
+          npm install -g http-server
+          # Start server in background
+          http-server . -p 8080 &
+          # Wait for server to start
+          sleep 5
+          
+      - name: Run Lighthouse PWA Audit
+        run: |
+          echo "🔍 Running Lighthouse PWA audit..."
+          lighthouse http://localhost:8080 \
+            --only-categories=pwa \
+            --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
+            --output=json \
+            --output-path=./lighthouse-pwa-report.json || true
+            
+      - name: Run Lighthouse Performance Audit
+        run: |
+          echo "⚡ Running Lighthouse performance audit..."
+          lighthouse http://localhost:8080 \
+            --only-categories=performance \
+            --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
+            --output=json \
+            --output-path=./lighthouse-performance-report.json || true
+            
+      - name: Run Lighthouse Accessibility Audit
+        run: |
+          echo "♿ Running Lighthouse accessibility audit..."
+          lighthouse http://localhost:8080 \
+            --only-categories=accessibility \
+            --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
+            --output=json \
+            --output-path=./lighthouse-accessibility-report.json || true
+            
+      - name: Parse and Display Results
+        run: |
+          echo "📊 Lighthouse Results Summary:"
+          
+          if [ -f "./lighthouse-pwa-report.json" ]; then
+            PWA_SCORE=$(cat lighthouse-pwa-report.json | jq '.categories.pwa.score * 100' 2>/dev/null || echo "N/A")
+            echo "PWA Score: ${PWA_SCORE}%"
+          fi
+          
+          if [ -f "./lighthouse-performance-report.json" ]; then
+            PERF_SCORE=$(cat lighthouse-performance-report.json | jq '.categories.performance.score * 100' 2>/dev/null || echo "N/A")
+            echo "Performance Score: ${PERF_SCORE}%"
+          fi
+          
+          if [ -f "./lighthouse-accessibility-report.json" ]; then
+            A11Y_SCORE=$(cat lighthouse-accessibility-report.json | jq '.categories.accessibility.score * 100' 2>/dev/null || echo "N/A")
+            echo "Accessibility Score: ${A11Y_SCORE}%"
+          fi
+          
+      - name: Upload Lighthouse Reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-reports
+          path: lighthouse-*.json
+          retention-days: 30
+          
+      - name: PWA Manifest Validation
+        run: |
+          echo "📱 Detailed PWA Manifest Validation"
+          
+          if [ -f "manifest.json" ]; then
+            echo "Checking manifest.json structure..."
+            
+            # Check required fields
+            REQUIRED_FIELDS=("name" "short_name" "start_url" "display" "icons")
+            
+            for field in "${REQUIRED_FIELDS[@]}"; do
+              if cat manifest.json | jq -e ".$field" > /dev/null 2>&1; then
+                echo "✅ $field: present"
+              else
+                echo "❌ $field: missing"
+              fi
+            done
+            
+            # Check icon sizes
+            echo "Icon validation:"
+            cat manifest.json | jq '.icons[]? | "\(.sizes): \(.src)"' 2>/dev/null || echo "No icons found in manifest"
+            
+          else
+            echo "❌ manifest.json not found"
+          fi
