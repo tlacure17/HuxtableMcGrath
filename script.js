@@ -115,14 +115,20 @@ function updateAllDisplays() {
     });
 }
 
+// Helper function to convert camelCase to kebab-case for HTML IDs
+function toKebabCase(str) {
+    return str.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();
+}
+
 // Generic function to update ability usage
 function updateAbilityUsage(abilityKey) {
     let usedCount = 0;
     const ability = abilities[abilityKey];
+    const htmlId = toKebabCase(abilityKey);
     
     // Count checked checkboxes
     for (let i = 1; i <= ability.maxUses; i++) {
-        const checkbox = document.getElementById(`${abilityKey}-use-${i}`);
+        const checkbox = document.getElementById(`${htmlId}-use-${i}`);
         if (checkbox && checkbox.checked) {
             usedCount++;
         }
@@ -137,7 +143,8 @@ function updateAbilityUsage(abilityKey) {
 function updateAbilityDisplay(abilityKey) {
     const ability = abilities[abilityKey];
     const remaining = ability.maxUses - ability.usedCount;
-    const remainingElement = document.getElementById(`${abilityKey}-remaining`);
+    const htmlId = toKebabCase(abilityKey);
+    const remainingElement = document.getElementById(`${htmlId}-remaining`);
     
     if (remainingElement) {
         remainingElement.textContent = remaining;
@@ -146,7 +153,7 @@ function updateAbilityDisplay(abilityKey) {
     
     // Update checkboxes to match saved state
     for (let i = 1; i <= ability.maxUses; i++) {
-        const checkbox = document.getElementById(`${abilityKey}-use-${i}`);
+        const checkbox = document.getElementById(`${htmlId}-use-${i}`);
         if (checkbox) {
             checkbox.checked = i <= ability.usedCount;
         }
@@ -160,8 +167,9 @@ function resetAbilityUses(abilityKey, confirmMessage) {
         ability.usedCount = 0;
         
         // Uncheck all checkboxes
+        const htmlId = toKebabCase(abilityKey);
         for (let i = 1; i <= ability.maxUses; i++) {
-            const checkbox = document.getElementById(`${abilityKey}-use-${i}`);
+            const checkbox = document.getElementById(`${htmlId}-use-${i}`);
             if (checkbox) {
                 checkbox.checked = false;
             }
@@ -350,10 +358,11 @@ function performShortRest() {
             if (ability.restType === 'short' && ability.usedCount > 0) {
                 resetCount++;
                 ability.usedCount = 0;
+                const htmlId = toKebabCase(abilityKey);
                 
                 // Uncheck checkboxes
                 for (let i = 1; i <= ability.maxUses; i++) {
-                    const checkbox = document.getElementById(`${abilityKey}-use-${i}`);
+                    const checkbox = document.getElementById(`${htmlId}-use-${i}`);
                     if (checkbox) {
                         checkbox.checked = false;
                     }
@@ -385,10 +394,11 @@ function performLongRest() {
             if (ability.usedCount > 0) {
                 resetCount++;
                 ability.usedCount = 0;
+                const htmlId = toKebabCase(abilityKey);
                 
                 // Uncheck checkboxes
                 for (let i = 1; i <= ability.maxUses; i++) {
-                    const checkbox = document.getElementById(`${abilityKey}-use-${i}`);
+                    const checkbox = document.getElementById(`${htmlId}-use-${i}`);
                     if (checkbox) {
                         checkbox.checked = false;
                     }
@@ -420,10 +430,11 @@ function performDawnRest() {
             if (ability.restType === 'dawn' && ability.usedCount > 0) {
                 resetCount++;
                 ability.usedCount = 0;
+                const htmlId = toKebabCase(abilityKey);
                 
                 // Uncheck checkboxes
                 for (let i = 1; i <= ability.maxUses; i++) {
-                    const checkbox = document.getElementById(`${abilityKey}-use-${i}`);
+                    const checkbox = document.getElementById(`${htmlId}-use-${i}`);
                     if (checkbox) {
                         checkbox.checked = false;
                     }
