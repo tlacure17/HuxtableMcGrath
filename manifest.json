@@ -1,0 +1,22 @@
+{
+    "name": "HuxtableMcGrath - D&D Ability Tracker",
+    "short_name": "HuxtableMcGrath",
+    "description": "Track D&D character abilities and rest mechanics",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#667eea",
+    "theme_color": "#2c3e50",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMjQiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIi8+CjxwYXRoIGQ9Ik05NiA0OEM3My45MDg2IDQ4IDU2IDY1LjkwODYgNTYgODhWMTA0QzU2IDEyNi4wOTEgNzMuOTA4NiAxNDQgOTYgMTQ0QzExOC4wOTEgMTQ0IDEzNiAxMjYuMDkxIDEzNiAxMDRWODhDMTM2IDY1LjkwODYgMTE4LjA5MSA0OCA5NiA0OFoiIGZpbGw9IndoaXRlIiBmaWxsLW9wYWNpdHk9IjAuOSIvPgo8Y2lyY2xlIGN4PSI4NCIgY3k9IjgwIiByPSI4IiBmaWxsPSIjMmMzZTUwIi8+CjxjaXJjbGUgY3g9IjEwOCIgY3k9IjgwIiByPSI4IiBmaWxsPSIjMmMzZTUwIi8+CjxwYXRoIGQ9Ik04NCA5NkM4NCA5OS4zMTM3IDg2LjY4NjMgMTAyIDkwIDEwMkgxMDJDMTA1LjMxNCAxMDIgMTA4IDk5LjMxMzcgMTA4IDk2VjkySDg0Vjk2WiIgZmlsbD0iIzJjM2U1MCIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudDBfbGluZWFyXzFfMSIgeDE9IjAiIHkxPSIwIiB4Mj0iMTkyIiB5Mj0iMTkyIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiM2NjdlZWEiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNzY0YmEyIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPC9zdmc+",
+            "sizes": "192x192",
+            "type": "image/svg+xml"
+        },
+        {
+            "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iNjQiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIi8+CjxwYXRoIGQ9Ik0yNTYgMTI4QzE5Ny4xMTUgMTI4IDE0OCAxNzcuMTE1IDE0OCAyMzZWMjc2QzE0OCAzMzQuODg1IDE5Ny4xMTUgMzg0IDI1NiAzODRDMzE0Ljg4NSAzODQgMzY0IDMzNC44ODUgMzY0IDI3NlYyMzZDMzY0IDE3Ny4xMTUgMzE0Ljg4NSAxMjggMjU2IDEyOFoiIGZpbGw9IndoaXRlIiBmaWxsLW9wYWNpdHk9IjAuOSIvPgo8Y2lyY2xlIGN4PSIyMjQiIGN5PSIyMDgiIHI9IjIwIiBmaWxsPSIjMmMzZTUwIi8+CjxjaXJjbGUgY3g9IjI4OCIgY3k9IjIwOCIgcj0iMjAiIGZpbGw9IiMyYzNlNTAiLz4KPHBhdGggZD0iTTIyNCAyNTZDMjI0IDI2NC44MzcgMjMxLjE2MyAyNzIgMjQwIDI3MkgyNzJDMjgwLjgzNyAyNzIgMjg4IDI2NC44MzcgMjg4IDI1NlYyNDRIMjI0VjI1NloiIGZpbGw9IiMyYzNlNTAiLz4KPGRGZWY+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQwX2xpbmVhcl8xXzEiIHgxPSIwIiB5MT0iMCIgeDI9IjUxMiIgeTI9IjUxMiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgo8c3RvcCBzdG9wLWNvbG9yPSIjNjY3ZWVhIi8+CjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzc2NGJhMiIvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPg==",
+            "sizes": "512x512",
+            "type": "image/svg+xml"
+        }
+    ]
+}
