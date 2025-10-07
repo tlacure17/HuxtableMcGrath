@@ -37,95 +37,330 @@
             <div class="abilities-container">
                 <h2>⚡ Character Abilities</h2>
                 
-                <!-- Sample Short Rest Ability -->
-                <div class="ability-card">
-                    <h3>🗡️ Action Surge</h3>
-                    <p class="ability-description">
-                        On your turn, you can take one additional action. Once you use this feature, you must finish a short or long rest before you can use it again.
-                    </p>
+                <!-- SHORT REST ABILITIES -->
+                <div class="rest-category">
+                    <h3 class="category-header">🏃‍♂️ Short Rest Abilities</h3>
                     
-                    <div class="ability-usage">
-                        <div class="usage-header">
-                            <span class="usage-label">Uses Remaining:</span>
-                            <span class="usage-count" id="action-surge-remaining">1</span>
-                            <span class="usage-total">/ 1</span>
-                        </div>
+                    <!-- Action Surge -->
+                    <div class="ability-card">
+                        <h3>🗡️ Action Surge</h3>
+                        <p class="ability-description">
+                            On your turn, you can take one additional action. Once you use this feature, you must finish a short or long rest before you can use it again.
+                        </p>
                         
-                        <div class="usage-checkboxes">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="action-surge-use-1" onchange="updateActionSurgeUsage()">
-                                <label for="action-surge-use-1">Used</label>
+                        <div class="ability-usage">
+                            <div class="usage-header">
+                                <span class="usage-label">Uses Remaining:</span>
+                                <span class="usage-count" id="action-surge-remaining">1</span>
+                                <span class="usage-total">/ 1</span>
+                            </div>
+                            
+                            <div class="usage-checkboxes">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="action-surge-use-1" onchange="updateActionSurgeUsage()">
+                                    <label for="action-surge-use-1">Used</label>
+                                </div>
+                            </div>
+                            
+                            <div class="ability-controls">
+                                <button class="btn btn-reset-individual" onclick="resetActionSurgeUses()">Reset (Short Rest)</button>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Superiority Dice -->
+                    <div class="ability-card">
+                        <h3>🎯 Superiority Dice</h3>
+                        <p class="ability-description">
+                            You have superiority dice (4d6 and 1d8). A superiority die is expended when you use it. You regain all of your expended superiority dice when you finish a short or long rest.
+                        </p>
                         
-                        <div class="ability-controls">
-                            <button class="btn btn-reset-individual" onclick="resetActionSurgeUses()">Reset (Short Rest)</button>
+                        <div class="ability-usage">
+                            <div class="usage-header">
+                                <span class="usage-label">Uses Remaining:</span>
+                                <span class="usage-count" id="superiority-dice-remaining">5</span>
+                                <span class="usage-total">/ 5</span>
+                            </div>
+                            
+                            <div class="usage-checkboxes">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="superiority-dice-use-1" onchange="updateSuperiorityDiceUsage()">
+                                    <label for="superiority-dice-use-1">d6 #1</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="superiority-dice-use-2" onchange="updateSuperiorityDiceUsage()">
+                                    <label for="superiority-dice-use-2">d6 #2</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="superiority-dice-use-3" onchange="updateSuperiorityDiceUsage()">
+                                    <label for="superiority-dice-use-3">d6 #3</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="superiority-dice-use-4" onchange="updateSuperiorityDiceUsage()">
+                                    <label for="superiority-dice-use-4">d6 #4</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="superiority-dice-use-5" onchange="updateSuperiorityDiceUsage()">
+                                    <label for="superiority-dice-use-5">d8</label>
+                                </div>
+                            </div>
+                            
+                            <div class="ability-controls">
+                                <button class="btn btn-reset-individual" onclick="resetSuperiorityDiceUses()">Reset (Short Rest)</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Second Wind/Tactical Mind -->
+                    <div class="ability-card">
+                        <h3>🔥 Second Wind / Tactical Mind</h3>
+                        <p class="ability-description">
+                            Second Wind: Regain hit points as a bonus action. Tactical Mind: Enhanced tactical awareness. You have 2 uses total, regaining 1 per short rest.
+                        </p>
+                        
+                        <div class="ability-usage">
+                            <div class="usage-header">
+                                <span class="usage-label">Uses Remaining:</span>
+                                <span class="usage-count" id="second-wind-remaining">2</span>
+                                <span class="usage-total">/ 2</span>
+                            </div>
+                            
+                            <div class="usage-checkboxes">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="second-wind-use-1" onchange="updateSecondWindUsage()">
+                                    <label for="second-wind-use-1">Use 1</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="second-wind-use-2" onchange="updateSecondWindUsage()">
+                                    <label for="second-wind-use-2">Use 2</label>
+                                </div>
+                            </div>
+                            
+                            <div class="ability-controls">
+                                <button class="btn btn-reset-individual" onclick="resetSecondWindUses()">Reset (Short Rest)</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Channel Divinity -->
+                    <div class="ability-card">
+                        <h3>✨ Channel Divinity</h3>
+                        <p class="ability-description">
+                            You can channel divine energy to fuel magical effects. You have 2 uses, regaining 1 per short rest.
+                        </p>
+                        
+                        <div class="ability-usage">
+                            <div class="usage-header">
+                                <span class="usage-label">Uses Remaining:</span>
+                                <span class="usage-count" id="channel-divinity-remaining">2</span>
+                                <span class="usage-total">/ 2</span>
+                            </div>
+                            
+                            <div class="usage-checkboxes">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="channel-divinity-use-1" onchange="updateChannelDivinityUsage()">
+                                    <label for="channel-divinity-use-1">Use 1</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="channel-divinity-use-2" onchange="updateChannelDivinityUsage()">
+                                    <label for="channel-divinity-use-2">Use 2</label>
+                                </div>
+                            </div>
+                            
+                            <div class="ability-controls">
+                                <button class="btn btn-reset-individual" onclick="resetChannelDivinityUses()">Reset (Short Rest)</button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Sample Long Rest Ability -->
-                <div class="ability-card">
-                    <h3>🎯 Superiority Dice</h3>
-                    <p class="ability-description">
-                        You have four superiority dice, which are d8s. A superiority die is expended when you use it. You regain all of your expended superiority dice when you finish a short or long rest.
-                    </p>
+                <!-- LONG REST ABILITIES -->
+                <div class="rest-category">
+                    <h3 class="category-header">🛌 Long Rest Abilities</h3>
                     
-                    <div class="ability-usage">
-                        <div class="usage-header">
-                            <span class="usage-label">Uses Remaining:</span>
-                            <span class="usage-count" id="superiority-dice-remaining">4</span>
-                            <span class="usage-total">/ 4</span>
-                        </div>
+                    <!-- Bardic Inspiration -->
+                    <div class="ability-card daily-ability">
+                        <h3>🎵 Bardic Inspiration</h3>
+                        <p class="ability-description">
+                            You can inspire others through stirring words or music. A creature can use your Bardic Inspiration die (3d6) as a bonus action. Recharges on long rest.
+                        </p>
                         
-                        <div class="usage-checkboxes">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="superiority-dice-use-1" onchange="updateSuperiorityDiceUsage()">
-                                <label for="superiority-dice-use-1">Die 1</label>
+                        <div class="ability-usage">
+                            <div class="usage-header">
+                                <span class="usage-label">Uses Remaining:</span>
+                                <span class="usage-count" id="bardic-inspiration-remaining">3</span>
+                                <span class="usage-total">/ 3</span>
                             </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="superiority-dice-use-2" onchange="updateSuperiorityDiceUsage()">
-                                <label for="superiority-dice-use-2">Die 2</label>
+                            
+                            <div class="usage-checkboxes">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="bardic-inspiration-use-1" onchange="updateBardicInspirationUsage()">
+                                    <label for="bardic-inspiration-use-1">d6 #1</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="bardic-inspiration-use-2" onchange="updateBardicInspirationUsage()">
+                                    <label for="bardic-inspiration-use-2">d6 #2</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="bardic-inspiration-use-3" onchange="updateBardicInspirationUsage()">
+                                    <label for="bardic-inspiration-use-3">d6 #3</label>
+                                </div>
                             </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="superiority-dice-use-3" onchange="updateSuperiorityDiceUsage()">
-                                <label for="superiority-dice-use-3">Die 3</label>
+                            
+                            <div class="ability-controls">
+                                <button class="btn btn-reset-individual" onclick="resetBardicInspirationUses()">Reset (Long Rest)</button>
                             </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="superiority-dice-use-4" onchange="updateSuperiorityDiceUsage()">
-                                <label for="superiority-dice-use-4">Die 4</label>
-                            </div>
-                        </div>
-                        
-                        <div class="ability-controls">
-                            <button class="btn btn-reset-individual" onclick="resetSuperiorityDiceUses()">Reset (Short Rest)</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Sample Daily Ability -->
-                <div class="ability-card daily-ability">
-                    <h3>🔥 Second Wind</h3>
-                    <p class="ability-description">
-                        You have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level.
-                    </p>
+                <!-- DAILY ABILITIES -->
+                <div class="rest-category">
+                    <h3 class="category-header">🌅 Daily Abilities</h3>
                     
-                    <div class="ability-usage">
-                        <div class="usage-header">
-                            <span class="usage-label">Uses Remaining:</span>
-                            <span class="usage-count" id="second-wind-remaining">1</span>
-                            <span class="usage-total">/ 1</span>
-                        </div>
+                    <!-- Fey Gift -->
+                    <div class="ability-card daily-ability">
+                        <h3>🧚‍♀️ Fey Gift</h3>
+                        <p class="ability-description">
+                            You can use your fey magic to provide assistance. 3 bonus action helps that recharge at dawn.
+                        </p>
                         
-                        <div class="usage-checkboxes">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="second-wind-use-1" onchange="updateSecondWindUsage()">
-                                <label for="second-wind-use-1">Used</label>
+                        <div class="ability-usage">
+                            <div class="usage-header">
+                                <span class="usage-label">Uses Remaining:</span>
+                                <span class="usage-count" id="fey-gift-remaining">3</span>
+                                <span class="usage-total">/ 3</span>
+                            </div>
+                            
+                            <div class="usage-checkboxes">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="fey-gift-use-1" onchange="updateFeyGiftUsage()">
+                                    <label for="fey-gift-use-1">Help 1</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="fey-gift-use-2" onchange="updateFeyGiftUsage()">
+                                    <label for="fey-gift-use-2">Help 2</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="fey-gift-use-3" onchange="updateFeyGiftUsage()">
+                                    <label for="fey-gift-use-3">Help 3</label>
+                                </div>
+                            </div>
+                            
+                            <div class="ability-controls">
+                                <button class="btn btn-reset-individual" onclick="resetFeyGiftUses()">Reset (Dawn)</button>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Fortune of the Many -->
+                    <div class="ability-card daily-ability">
+                        <h3>🍀 Fortune of the Many</h3>
+                        <p class="ability-description">
+                            You can draw upon the collective luck of many. 3 uses per day, recharging at dawn.
+                        </p>
                         
-                        <div class="ability-controls">
-                            <button class="btn btn-reset-individual" onclick="resetSecondWindUses()">Reset (Long Rest)</button>
+                        <div class="ability-usage">
+                            <div class="usage-header">
+                                <span class="usage-label">Uses Remaining:</span>
+                                <span class="usage-count" id="fortune-many-remaining">3</span>
+                                <span class="usage-total">/ 3</span>
+                            </div>
+                            
+                            <div class="usage-checkboxes">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="fortune-many-use-1" onchange="updateFortuneManyUsage()">
+                                    <label for="fortune-many-use-1">Use 1</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="fortune-many-use-2" onchange="updateFortuneManyUsage()">
+                                    <label for="fortune-many-use-2">Use 2</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="fortune-many-use-3" onchange="updateFortuneManyUsage()">
+                                    <label for="fortune-many-use-3">Use 3</label>
+                                </div>
+                            </div>
+                            
+                            <div class="ability-controls">
+                                <button class="btn btn-reset-individual" onclick="resetFortuneManyUses()">Reset (Dawn)</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Thermos -->
+                    <div class="ability-card daily-ability">
+                        <h3>🍶 Thermos</h3>
+                        <p class="ability-description">
+                            A magical thermos with 1d4 charges per day. Roll 1d4 at dawn to determine daily charges.
+                        </p>
+                        
+                        <div class="ability-usage">
+                            <div class="usage-header">
+                                <span class="usage-label">Uses Remaining:</span>
+                                <span class="usage-count" id="thermos-remaining">2</span>
+                                <span class="usage-total">/ 2</span>
+                                <small>(Roll 1d4 at dawn)</small>
+                            </div>
+                            
+                            <div class="usage-checkboxes">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="thermos-use-1" onchange="updateThermosUsage()">
+                                    <label for="thermos-use-1">Charge 1</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="thermos-use-2" onchange="updateThermosUsage()">
+                                    <label for="thermos-use-2">Charge 2</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="thermos-use-3" onchange="updateThermosUsage()" style="display:none;">
+                                    <label for="thermos-use-3" style="display:none;">Charge 3</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="thermos-use-4" onchange="updateThermosUsage()" style="display:none;">
+                                    <label for="thermos-use-4" style="display:none;">Charge 4</label>
+                                </div>
+                            </div>
+                            
+                            <div class="ability-controls">
+                                <button class="btn btn-reset-individual" onclick="resetThermosUses()">Reset (Dawn)</button>
+                                <button class="btn btn-roll-charges" onclick="rollThermosCharges()">Roll New Charges</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Benedictus' Judgement -->
+                    <div class="ability-card daily-ability">
+                        <h3>⚖️ Benedictus' Judgement</h3>
+                        <p class="ability-description">
+                            A powerful divine judgement ability. 3 uses per day, recharging at dawn.
+                        </p>
+                        
+                        <div class="ability-usage">
+                            <div class="usage-header">
+                                <span class="usage-label">Uses Remaining:</span>
+                                <span class="usage-count" id="benedictus-remaining">3</span>
+                                <span class="usage-total">/ 3</span>
+                            </div>
+                            
+                            <div class="usage-checkboxes">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="benedictus-use-1" onchange="updateBenedictusUsage()">
+                                    <label for="benedictus-use-1">Use 1</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="benedictus-use-2" onchange="updateBenedictusUsage()">
+                                    <label for="benedictus-use-2">Use 2</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="benedictus-use-3" onchange="updateBenedictusUsage()">
+                                    <label for="benedictus-use-3">Use 3</label>
+                                </div>
+                            </div>
+                            
+                            <div class="ability-controls">
+                                <button class="btn btn-reset-individual" onclick="resetBenedictusUses()">Reset (Dawn)</button>
+                            </div>
                         </div>
                     </div>
                 </div>

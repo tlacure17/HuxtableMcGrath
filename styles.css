@@ -113,6 +113,23 @@ header p {
     text-align: center;
 }
 
+/* Rest Category Sections */
+.rest-category {
+    margin-bottom: 2.5rem;
+}
+
+.category-header {
+    color: #2c3e50;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 8px;
+    border-left: 5px solid #3498db;
+    text-align: left;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
 /* Ability Cards */
 .ability-card {
     border: 2px solid #bdc3c7;
@@ -238,6 +255,22 @@ header p {
 
 .btn-reset-individual:hover {
     background: #e67e22;
+    transform: translateY(-1px);
+}
+
+.btn-roll-charges {
+    background: #9b59b6;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.btn-roll-charges:hover {
+    background: #8e44ad;
     transform: translateY(-1px);
 }
 

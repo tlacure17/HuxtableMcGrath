@@ -1,23 +1,61 @@
 // Ability tracking state
 let abilities = {
-    // Built-in abilities
+    // Short Rest Abilities
     actionSurge: {
         name: "Action Surge",
         maxUses: 1,
         usedCount: 0,
-        restType: "short" // short, long, dawn
+        restType: "short"
     },
     superiorityDice: {
         name: "Superiority Dice",
-        maxUses: 4,
+        maxUses: 5, // 4d6 + 1d8
         usedCount: 0,
         restType: "short"
     },
     secondWind: {
-        name: "Second Wind",
-        maxUses: 1,
+        name: "Second Wind / Tactical Mind",
+        maxUses: 2,
+        usedCount: 0,
+        restType: "short"
+    },
+    channelDivinity: {
+        name: "Channel Divinity",
+        maxUses: 2,
+        usedCount: 0,
+        restType: "short"
+    },
+    // Long Rest Abilities
+    bardicInspiration: {
+        name: "Bardic Inspiration",
+        maxUses: 3,
         usedCount: 0,
         restType: "long"
+    },
+    // Daily Abilities
+    feyGift: {
+        name: "Fey Gift",
+        maxUses: 3,
+        usedCount: 0,
+        restType: "dawn"
+    },
+    fortuneMany: {
+        name: "Fortune of the Many",
+        maxUses: 3,
+        usedCount: 0,
+        restType: "dawn"
+    },
+    thermos: {
+        name: "Thermos",
+        maxUses: 2, // Default, will be rolled
+        usedCount: 0,
+        restType: "dawn"
+    },
+    benedictus: {
+        name: "Benedictus' Judgement",
+        maxUses: 3,
+        usedCount: 0,
+        restType: "dawn"
     }
 };
 
@@ -54,13 +92,24 @@ function loadState() {
 
 // Update all ability displays
 function updateAllDisplays() {
+    // Short rest abilities
     updateActionSurgeDisplay();
     updateSuperiorityDiceDisplay();
     updateSecondWindDisplay();
+    updateChannelDivinityDisplay();
+    
+    // Long rest abilities
+    updateBardicInspirationDisplay();
+    
+    // Daily abilities
+    updateFeyGiftDisplay();
+    updateFortuneManyDisplay();
+    updateThermosDisplay();
+    updateBenedictusDisplay();
     
     // Update custom abilities
     Object.keys(abilities).forEach(abilityKey => {
-        if (!['actionSurge', 'superiorityDice', 'secondWind'].includes(abilityKey)) {
+        if (!['actionSurge', 'superiorityDice', 'secondWind', 'channelDivinity', 'bardicInspiration', 'feyGift', 'fortuneMany', 'thermos', 'benedictus'].includes(abilityKey)) {
             updateCustomAbilityDisplay(abilityKey);
         }
     });
@@ -131,7 +180,7 @@ function resetAbilityUses(abilityKey, confirmMessage) {
     }
 }
 
-// Specific ability functions
+// Specific ability functions - Short Rest
 function updateActionSurgeUsage() {
     updateAbilityUsage('actionSurge');
 }
@@ -165,7 +214,115 @@ function updateSecondWindDisplay() {
 }
 
 function resetSecondWindUses() {
-    resetAbilityUses('secondWind', 'Reset Second Wind? (Long Rest)');
+    resetAbilityUses('secondWind', 'Reset Second Wind/Tactical Mind? (Short Rest)');
+}
+
+function updateChannelDivinityUsage() {
+    updateAbilityUsage('channelDivinity');
+}
+
+function updateChannelDivinityDisplay() {
+    updateAbilityDisplay('channelDivinity');
+}
+
+function resetChannelDivinityUses() {
+    resetAbilityUses('channelDivinity', 'Reset Channel Divinity? (Short Rest)');
+}
+
+// Specific ability functions - Long Rest
+function updateBardicInspirationUsage() {
+    updateAbilityUsage('bardicInspiration');
+}
+
+function updateBardicInspirationDisplay() {
+    updateAbilityDisplay('bardicInspiration');
+}
+
+function resetBardicInspirationUses() {
+    resetAbilityUses('bardicInspiration', 'Reset Bardic Inspiration? (Long Rest)');
+}
+
+// Specific ability functions - Daily
+function updateFeyGiftUsage() {
+    updateAbilityUsage('feyGift');
+}
+
+function updateFeyGiftDisplay() {
+    updateAbilityDisplay('feyGift');
+}
+
+function resetFeyGiftUses() {
+    resetAbilityUses('feyGift', 'Reset Fey Gift? (Dawn)');
+}
+
+function updateFortuneManyUsage() {
+    updateAbilityUsage('fortuneMany');
+}
+
+function updateFortuneManyDisplay() {
+    updateAbilityDisplay('fortuneMany');
+}
+
+function resetFortuneManyUses() {
+    resetAbilityUses('fortuneMany', 'Reset Fortune of the Many? (Dawn)');
+}
+
+function updateThermosUsage() {
+    updateAbilityUsage('thermos');
+}
+
+function updateThermosDisplay() {
+    updateAbilityDisplay('thermos');
+}
+
+function resetThermosUses() {
+    resetAbilityUses('thermos', 'Reset Thermos? (Dawn)');
+}
+
+function rollThermosCharges() {
+    const roll = Math.floor(Math.random() * 4) + 1; // 1d4
+    abilities.thermos.maxUses = roll;
+    abilities.thermos.usedCount = 0;
+    
+    // Update the display
+    const totalElement = document.querySelector('#thermos-remaining').nextElementSibling;
+    if (totalElement) {
+        totalElement.textContent = `/ ${roll}`;
+    }
+    
+    // Show/hide checkboxes based on roll
+    for (let i = 1; i <= 4; i++) {
+        const checkbox = document.getElementById(`thermos-use-${i}`);
+        const label = document.querySelector(`label[for="thermos-use-${i}"]`);
+        if (checkbox && label) {
+            if (i <= roll) {
+                checkbox.style.display = 'inline-block';
+                label.style.display = 'inline-block';
+                checkbox.checked = false;
+            } else {
+                checkbox.style.display = 'none';
+                label.style.display = 'none';
+                checkbox.checked = false;
+            }
+        }
+    }
+    
+    updateThermosDisplay();
+    saveState();
+    
+    alert(`Rolled ${roll} charges for Thermos!`);
+}
+
+function updateBenedictusUsage() {
+    updateAbilityUsage('benedictus');
+}
+
+function updateBenedictusDisplay() {
+    updateAbilityDisplay('benedictus');
+}
+
+function resetBenedictusUses() {
+    resetAbilityUses('benedictus', 'Reset Benedictus\' Judgement? (Dawn)');
 }
 
 // Master rest functions
@@ -204,11 +361,12 @@ function performShortRest() {
 }
 
 function performLongRest() {
-    if (confirm('Perform Long Rest? This will reset ALL abilities.')) {
+    if (confirm('Perform Long Rest? This will reset ALL abilities (short rest + long rest + daily).')) {
         let resetCount = 0;
         
         Object.keys(abilities).forEach(abilityKey => {
             const ability = abilities[abilityKey];
+            // Long rest resets everything except dawn-only abilities
             if (ability.usedCount > 0) {
                 resetCount++;
                 ability.usedCount = 0;
@@ -234,6 +392,41 @@ function performLongRest() {
         });
         
         alert(`Long Rest completed! Reset ${resetCount} abilities.`);
+    }
+}
+
+// New dawn rest function for daily abilities
+function performDawnRest() {
+    if (confirm('New Dawn? This will reset all daily abilities only.')) {
+        let resetCount = 0;
+        
+        Object.keys(abilities).forEach(abilityKey => {
+            const ability = abilities[abilityKey];
+            if (ability.restType === 'dawn' && ability.usedCount > 0) {
+                resetCount++;
+                ability.usedCount = 0;
+                
+                // Uncheck checkboxes
+                for (let i = 1; i <= ability.maxUses; i++) {
+                    const checkbox = document.getElementById(`${abilityKey}-use-${i}`);
+                    if (checkbox) {
+                        checkbox.checked = false;
+                    }
+                }
+            }
+        });
+        
+        updateAllDisplays();
+        saveState();
+        
+        // Visual feedback for daily abilities only
+        const dailyCards = document.querySelectorAll('.daily-ability');
+        dailyCards.forEach(card => {
+            card.classList.add('reset-animation');
+            setTimeout(() => card.classList.remove('reset-animation'), 500);
+        });
+        
+        alert(`Dawn Rest completed! Reset ${resetCount} daily abilities.`);
     }
 }
 
