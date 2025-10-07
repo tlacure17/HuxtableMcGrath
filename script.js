@@ -9,7 +9,7 @@ let abilities = {
     },
     superiorityDice: {
         name: "Superiority Dice",
-        maxUses: 5, // 4d6 + 1d8
+        maxUses: 5, // 4d8 + 1d6
         usedCount: 0,
         restType: "short"
     },
