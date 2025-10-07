@@ -270,7 +270,24 @@ header p {
     margin-top: 0.5rem;
 }
 
-.btn-roll-charges {
+.charges-input {
+    width: 50px;
+    padding: 0.4rem;
+    border: 2px solid #bdc3c7;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+.charges-input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 3px rgba(52, 152, 219, 0.3);
+}
+
+.btn-set-charges {
     background: #9b59b6;
     color: white;
     padding: 0.4rem 0.8rem;
@@ -282,7 +299,7 @@ header p {
     transition: all 0.2s ease;
 }
 
-.btn-roll-charges:hover {
+.btn-set-charges:hover {
     background: #8e44ad;
     transform: translateY(-1px);
 }

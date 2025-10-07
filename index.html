@@ -269,7 +269,7 @@
                     <div class="ability-card daily-ability">
                         <h3>🍶 Thermos</h3>
                         <p class="ability-description">
-                            A magical thermos with 1d4 charges per day. Roll 1d4 at dawn to determine daily charges.
+                            A magical thermos with 1-4 charges per day. Set the number of charges at dawn.
                         </p>
                         
                         <div class="ability-usage">
@@ -277,7 +277,7 @@
                                 <span class="usage-label">Uses Remaining:</span>
                                 <span class="usage-count" id="thermos-remaining">2</span>
                                 <span class="usage-total">/ 2</span>
-                                <small>(Roll 1d4 at dawn)</small>
+                                <small>(1-4 charges daily)</small>
                             </div>
                             
                             <div class="usage-checkboxes">
@@ -300,7 +300,8 @@
                             </div>
                             
                             <div class="ability-controls">
-                                <button class="btn btn-roll-charges" onclick="rollThermosCharges()">🎲 Roll New Charges</button>
+                                <input type="number" id="thermos-charges-input" min="1" max="4" value="2" class="charges-input">
+                                <button class="btn btn-set-charges" onclick="setThermosCharges()">Set Charges</button>
                             </div>
                         </div>
                     </div>

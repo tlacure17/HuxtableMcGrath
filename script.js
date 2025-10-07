@@ -273,29 +273,44 @@ function updateThermosUsage() {
 
 function updateThermosDisplay() {
     updateAbilityDisplay('thermos');
+    
+    // Update the input field to show current max charges
+    const input = document.getElementById('thermos-charges-input');
+    if (input) {
+        input.value = abilities.thermos.maxUses;
+    }
 }
 
 function resetThermosUses() {
     resetAbilityUses('thermos', 'Reset Thermos? (Dawn)');
 }
 
-function rollThermosCharges() {
-    const roll = Math.floor(Math.random() * 4) + 1; // 1d4
-    abilities.thermos.maxUses = roll;
+function setThermosCharges() {
+    const input = document.getElementById('thermos-charges-input');
+    const charges = parseInt(input.value);
+    
+    // Validate input
+    if (charges < 1 || charges > 4 || isNaN(charges)) {
+        alert('Please enter a number between 1 and 4 for Thermos charges.');
+        input.value = abilities.thermos.maxUses; // Reset to current value
+        return;
+    }
+    
+    abilities.thermos.maxUses = charges;
     abilities.thermos.usedCount = 0;
     
     // Update the display
     const totalElement = document.querySelector('#thermos-remaining').nextElementSibling;
     if (totalElement) {
-        totalElement.textContent = `/ ${roll}`;
+        totalElement.textContent = `/ ${charges}`;
     }
     
-    // Show/hide checkboxes based on roll
+    // Show/hide checkboxes based on charges
     for (let i = 1; i <= 4; i++) {
         const checkbox = document.getElementById(`thermos-use-${i}`);
         const label = document.querySelector(`label[for="thermos-use-${i}"]`);
         if (checkbox && label) {
-            if (i <= roll) {
+            if (i <= charges) {
                 checkbox.style.display = 'inline-block';
                 label.style.display = 'inline-block';
                 checkbox.checked = false;
@@ -310,7 +325,7 @@ function rollThermosCharges() {
     updateThermosDisplay();
     saveState();
     
-    alert(`Rolled ${roll} charges for Thermos!`);
+    alert(`Set Thermos to ${charges} charges!`);
 }
 
 function updateBenedictusUsage() {
